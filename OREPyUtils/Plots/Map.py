@@ -61,20 +61,22 @@ class PlotMap(Manager.PlotManager):
 	"""
 	def MarkPlotFrame(self, x, y):
 		position = self.PlotToMapCoords(x, y)
-
+		
 		self.world.getBlockAt(position[0] - 2, self.size.pos.y, position[1]    ).setTypeIdAndData(*PlotMap.BLOCK_FRAME_Y)
 		self.world.getBlockAt(position[0] - 2, self.size.pos.y, position[1] - 1).setTypeIdAndData(*PlotMap.BLOCK_FRAME_Y)
 		self.world.getBlockAt(position[0],     self.size.pos.y, position[1] - 2).setTypeIdAndData(*PlotMap.BLOCK_FRAME_X)
 		self.world.getBlockAt(position[0] - 1, self.size.pos.y, position[1] - 2).setTypeIdAndData(*PlotMap.BLOCK_FRAME_X)
 
-		if x == self.size.radius-1:
+		if x in self.size.radius-1, -1:
 			self.world.getBlockAt(position[0] + 1, self.size.pos.y, position[1]    ).setTypeIdAndData(*PlotMap.BLOCK_FRAME_Y)
 			self.world.getBlockAt(position[0] + 1, self.size.pos.y, position[1] - 1).setTypeIdAndData(*PlotMap.BLOCK_FRAME_Y)
 
-		if y == self.size.radius-1:
+			if y in self.size.radius-1, -1:
+				self.world.getBlockAt(position[0] + 1, self.size.pos.y, position[1] + 1).setTypeIdAndData(*self.BLOCK_FRAME_CROSS)
+
+		if y in self.size.radius-1, -1:
 			self.world.getBlockAt(position[0],     self.size.pos.y, position[1] + 1).setTypeIdAndData(*PlotMap.BLOCK_FRAME_X)
 			self.world.getBlockAt(position[0] - 1, self.size.pos.y, position[1] + 1).setTypeIdAndData(*PlotMap.BLOCK_FRAME_X)
-
 
 		self.world.getBlockAt(position[0] - 2, self.size.pos.y, position[1] - 2).setTypeIdAndData(*PlotMap.BLOCK_FRAME_CROSS)
 
